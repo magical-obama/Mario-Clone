@@ -33,4 +33,20 @@ public class LevelEditorScene extends Scene {
             Window.changeScene(1);
         }
     }
+
+    @Override
+    public boolean in(float dt) {
+        return true;
+    }
+
+    @Override
+    public boolean out(float dt) {
+        if (timeToChangeScene > 0) {
+            timeToChangeScene -= dt;
+            Window.get().r -= dt * 5.0f;
+            Window.get().g -= dt * 5.0f;
+            Window.get().b -= dt * 5.0f;
+            return false;
+        } else  { return true; }
+    }
 }

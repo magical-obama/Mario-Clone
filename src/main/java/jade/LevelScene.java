@@ -15,6 +15,17 @@ public class LevelScene extends Scene {
 
     @Override
     public void update(float dt) {
+        System.out.println("" + Math.round(1.0f / dt) + "FPS");
 
+    }
+
+    @Override
+    public boolean in(float dt) {
+        return true;
+    }
+
+    @Override
+    public boolean out(float dt) {
+        return true;
     }
 }
