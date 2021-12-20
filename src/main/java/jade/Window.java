@@ -19,9 +19,7 @@ public class Window {
     public float r, g, b, a;
     private final boolean fadeToBlack = false;
 
-    private static Window window = null;
-
-    private static Scene currentScene;
+    private static Window instance = null;
 
     private Window() {
         this.width = 1920;
@@ -33,28 +31,28 @@ public class Window {
         a = 1;
     }
 
-    public static void changeScene(int newScene) {
+    /*public static void changeScene(int newScene) {
         switch (newScene) {
             case 0:
-                currentScene = new LevelEditorScene();
+                SceneManager.get().changeScene(new LevelEditorScene());
                 // currentScene.init();
                 break;
             case 1:
-                currentScene = new LevelScene();
+                SceneManager.get().changeScene(new LevelScene());
                 // currentScene.init();
                 break;
             default:
                 assert false : "Unknown scene " + newScene + ".";
                 break;
         }
-    }
+    }*/
 
     public static Window get() {
-        if (Window.window == null) {
-            Window.window = new Window();
+        if (Window.instance == null) {
+            Window.instance = new Window();
         }
 
-        return Window.window;
+        return Window.instance;
     }
 
     public void run() {
@@ -107,7 +105,7 @@ public class Window {
 
         GL.createCapabilities();
 
-        Window.changeScene(0);
+        SceneManager.get().changeScene(new LevelEditorScene());
     }
 
     public void loop() {
@@ -123,7 +121,7 @@ public class Window {
             glClear(GL_COLOR_BUFFER_BIT);
 
             if (dt >= 0) {
-                currentScene.update(dt);
+                SceneManager.get().activeScene.update(dt);
             }
 
             glfwSwapBuffers(glfwWindow);

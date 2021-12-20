@@ -1,6 +1,7 @@
 package jade;
 
 public class LevelScene extends Scene {
+    private float inTime = 2.0f;
 
     public LevelScene() {
         Window.get().r = 1;
@@ -21,7 +22,13 @@ public class LevelScene extends Scene {
 
     @Override
     public boolean in(float dt) {
-        return true;
+        if (inTime > 0) {
+            inTime -= dt;
+            Window.get().r -= dt * 5.0f;
+            Window.get().g -= dt * 5.0f;
+            Window.get().b -= dt * 5.0f;
+            return false;
+        } else  { return true; }
     }
 
     @Override

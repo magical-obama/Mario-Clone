@@ -4,8 +4,8 @@ import java.awt.event.KeyEvent;
 
 public class LevelEditorScene extends Scene {
 
-    private boolean changingScene = false;
-    private float timeToChangeScene = 2.0f;
+    private float outTime = 2.0f;
+    private boolean isChanging = false;
 
     public LevelEditorScene() {
 
@@ -18,19 +18,12 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void update(float dt) {
-        System.out.println("" + Math.round(1.0f / dt) + "FPS");
-
-        if (!changingScene && KeyListener.isKeyPressed(KeyEvent.VK_SPACE)) {
-            changingScene = true;
+        if (KeyListener.isKeyPressed(KeyEvent.VK_SPACE)) {
+            isChanging = true;
         }
 
-        if (changingScene && timeToChangeScene > 0) {
-            timeToChangeScene -= dt;
-            Window.get().r -= dt * 5.0f;
-            Window.get().g -= dt * 5.0f;
-            Window.get().b -= dt * 5.0f;
-        } else if (changingScene) {
-            Window.changeScene(1);
+        if (isChanging) {
+            SceneManager.get().changeScene(new LevelScene());
         }
     }
 
@@ -41,8 +34,8 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public boolean out(float dt) {
-        if (timeToChangeScene > 0) {
-            timeToChangeScene -= dt;
+        if (outTime > 0) {
+            outTime -= dt;
             Window.get().r -= dt * 5.0f;
             Window.get().g -= dt * 5.0f;
             Window.get().b -= dt * 5.0f;
