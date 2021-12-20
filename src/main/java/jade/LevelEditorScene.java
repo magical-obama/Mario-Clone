@@ -8,12 +8,16 @@ public class LevelEditorScene extends Scene {
     private float timeToChangeScene = 2.0f;
 
     public LevelEditorScene() {
-        System.out.println("Inside level editor scene");
+
+    }
+
+    @Override
+    public void init() {
+        System.out.println("Inside Level editor scene");
     }
 
     @Override
     public void update(float dt) {
-
         System.out.println("" + Math.round(1.0f / dt) + "FPS");
 
         if (!changingScene && KeyListener.isKeyPressed(KeyEvent.VK_SPACE)) {
