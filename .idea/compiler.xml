@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Minecraft 2.0" />
         <module name="Mario Clone" />
+        <module name="marioClone" />
       </profile>
     </annotationProcessing>
   </component>
