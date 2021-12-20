@@ -20,12 +20,23 @@ public class SceneManager {
     }
 
     /**
-     * Change the Scene
+     * Change the Scene, without animation/transition
      * @param newScene The scene to switch to
      */
     public void changeScene(Scene newScene) {
-
         activeScene = newScene;
-        // TODO: Play In Animation
     }
+
+    /**
+     * Change the scene, with animation/transition
+     * @param newScene The scene to switch to
+     * @param dt Delta time
+     */
+    public void changeScene(Scene newScene, float dt) {
+        boolean outEnded = activeScene.out(dt);
+        if (outEnded) {
+            activeScene = newScene;
+        }
+    }
+
 }

@@ -2,6 +2,7 @@ package jade;
 
 public class LevelScene extends Scene {
     private float inTime = 2.0f;
+    private boolean playIn = true;
 
     public LevelScene() {
         Window.get().r = 1;
@@ -16,6 +17,10 @@ public class LevelScene extends Scene {
 
     @Override
     public void update(float dt) {
+        if (playIn) {
+            playIn = !in(dt);
+        }
+
         System.out.println("" + Math.round(1.0f / dt) + "FPS");
 
     }
@@ -24,9 +29,9 @@ public class LevelScene extends Scene {
     public boolean in(float dt) {
         if (inTime > 0) {
             inTime -= dt;
-            Window.get().r -= dt * 5.0f;
-            Window.get().g -= dt * 5.0f;
-            Window.get().b -= dt * 5.0f;
+            Window.get().r += dt * 5.0f;
+            Window.get().g += dt * 5.0f;
+            Window.get().b += dt * 5.0f;
             return false;
         } else  { return true; }
     }

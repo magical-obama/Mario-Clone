@@ -6,9 +6,9 @@ public class LevelEditorScene extends Scene {
 
     private float outTime = 2.0f;
     private boolean isChanging = false;
+    private boolean playIn = true;
 
     public LevelEditorScene() {
-
     }
 
     @Override
@@ -18,12 +18,16 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void update(float dt) {
+        if (playIn) {
+            playIn = !in(dt);
+        }
+
         if (KeyListener.isKeyPressed(KeyEvent.VK_SPACE)) {
             isChanging = true;
         }
 
         if (isChanging) {
-            SceneManager.get().changeScene(new LevelScene());
+            SceneManager.get().changeScene(new LevelScene(), dt);
         }
     }
 
